@@ -331,18 +331,33 @@ print(predict(lstm, english_dictionary, english_list, "how are"))
 print(predict(lstm, english_dictionary, english_list, "hi"))
 print(predict(lstm, english_dictionary, english_list, "choose"))
 
-def plot_training_curves(training_curves,
-                         phases=['train', 'val', 'test'],
-                         metrics=['loss']):
+# def plot_training_curves(training_curves,
+#                          phases=['train', 'val', 'test'],
+#                          metrics=['loss']):
+#     epochs = list(range(len(training_curves['train_loss'])))
+#     for metric in metrics:
+#         plt.figure()
+#         plt.title(f'Training curves - {metric}')
+#         for phase in phases:
+#             key = phase+'_'+metric
+#             if key in training_curves:
+#                 plt.plot(epochs, training_curves[key])
+#         plt.xlabel('epoch')
+#         plt.legend(labels=phases)
+
+def plot_training_curves(training_curves, phases=['train', 'val', 'test'], metrics=['loss']):
     epochs = list(range(len(training_curves['train_loss'])))
     for metric in metrics:
         plt.figure()
         plt.title(f'Training curves - {metric}')
         for phase in phases:
-            key = phase+'_'+metric
+            key = phase + '_' + metric
             if key in training_curves:
-                plt.plot(epochs, training_curves[key])
-        plt.xlabel('epoch')
-        plt.legend(labels=phases)
+                plt.plot(epochs, training_curves[key], label=phase)
+        plt.xlabel('Epoch')
+        plt.ylabel(metric.capitalize())
+        plt.legend()
+        plt.show()  # This will display the plot
 
+# Example usage (make sure to replace 'training_curves' with your actual data)
 plot_training_curves(training_curves, phases=['train', 'val', 'test'])
